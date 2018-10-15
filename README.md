@@ -1,1 +1,2 @@
 # pedestal_automatisation
+TEST
