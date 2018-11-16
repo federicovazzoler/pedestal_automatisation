@@ -2,4 +2,5 @@
 *.pem
 *.p12
 *.root
-*.txt
+*.d
+*.so
