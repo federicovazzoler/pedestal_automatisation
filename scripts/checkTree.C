@@ -46,8 +46,6 @@ void checkTree(TString fileToOpen_PATH)
     for (Int_t i = 0; i < myTree->GetEntries(); i++) 
     {
         myTree->GetEntry(i);     
-        // FIXME Needed?
         cout << "Checking entry = " << i << " | RUN = " << run << endl;
-        // FIXME
     }
 }
