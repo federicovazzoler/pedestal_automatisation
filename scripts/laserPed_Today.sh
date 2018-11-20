@@ -62,7 +62,7 @@ fi
 echo "[INFO]: Files already processed $filesAlreadyProcessed" >> $outLogFile
 
 # file list of new files to be processed
-newFile_List=$outMetadat\aPATH"/laserPed_"$todayDate"_newFileList.txt"
+newFile_List=$outMetadataPATH"/laserPed_"$todayDate"_newFileList.txt"
 todayFile_List=$outFilelistPATH"/laserPed_"$todayDate"_FileList.txt"
 #krenew -i -t $scriptsPATH/utility/generateFileList.sh $outFilelistPATH $inDataPATH $outLogFile $scriptsPATH $todayFile_List $newFile_List
 $scriptsPATH/utility/generateFileList.sh $outFilelistPATH $inDataPATH $outLogFile $scriptsPATH $todayFile_List $newFile_List
