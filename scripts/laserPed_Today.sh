@@ -179,7 +179,7 @@ if [ "$isNTupleAlreadyThere" ]; then
     export scriptsPATH
     export files_to_process
 
-#    krenew -i -t $scriptsPATH/call_root_NoCrystalTree.sh >> $outLogFile
+    #krenew -i -t $scriptsPATH/call_root_NoCrystalTree.sh >> $outLogFile
     $scriptsPATH/utility/generateTree.sh $isNTupleAlreadyThere >> $outLogFile
     if [ $? -ne 0 ]; then
         echo "[ERROR]: Impossible to process the files with the ROOT macro. Let us exit the main program." >> $outLogFile 
@@ -201,7 +201,6 @@ if [ "$isNTupleAlreadyThere" ]; then
         echo "[INFO]: Hadd completed." >> $outLogFile 
     fi
 else
-    # since is the first time the script is called ana_ped does not exist and the first tree should contain the crystal info
     export treePATH
     export outFileNAME_today
     export runSummary
@@ -211,7 +210,8 @@ else
     export filesAlreadyProcessed
     export scriptsPATH
     export files_to_process
-#    krenew -i -t $scriptsPATH/call_root.sh >> $outLogFile
+
+    #krenew -i -t $scriptsPATH/call_root.sh >> $outLogFile
     $scriptsPATH/utility/generateTree.sh $isNTupleAlreadyThere >> $outLogFile
     if [ $? -ne 0 ]; then
         echo "[ERROR]: Impossible to process the files with the ROOT macro. Let us exit the main program." >> $outLogFile 
@@ -226,6 +226,6 @@ fi
 
 # Fix delle fed mancanti (opzionale)
 
-echo "[INFO]: DONE for today. Unbelievable!" >> $outLogFile 
+echo "[INFO]: DONE for today." >> $outLogFile 
 
 exit 0
