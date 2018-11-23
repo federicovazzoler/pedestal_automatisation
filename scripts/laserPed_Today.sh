@@ -162,6 +162,12 @@ todayFileList=$outMetadataPATH"/laserPed_"$todayDate"_newFileList.txt"
 files_to_process=$(wc $todayFileList | awk '{print $1}')
 
 if [ "$(ls $treePATH"/" | grep $outFileNAME".root")" ]; then
+    isNTupleAlreadyThere = true
+else
+    isNTupleAlreadyThere = false
+fi
+
+if [ "$isNTupleAlreadyThere" ]; then
     printf "\n"
     export treePATH
     export outFileNAME_today
@@ -172,14 +178,15 @@ if [ "$(ls $treePATH"/" | grep $outFileNAME".root")" ]; then
     export filesAlreadyProcessed
     export scriptsPATH
     export files_to_process
+
 #    krenew -i -t $scriptsPATH/call_root_NoCrystalTree.sh >> $outLogFile
-    $scriptsPATH/utility/call_root_NoCrystalTree.sh >> $outLogFile
+    $scriptsPATH/utility/generateTree.sh $isNTupleAlreadyThere >> $outLogFile
     if [ $? -ne 0 ]; then
         echo "[ERROR]: Impossible to process the files with the ROOT macro. Let us exit the main program." >> $outLogFile 
         exit 1
     fi
+
     printf "Now the hadd with the previous file\n"
-    # krenew here?
     hadd $tmpPATH"/"$outFileNAME"_tmp.root" $treePATH"/"$outFileNAME".root" $treePATH"/"$outFileNAME_today".root"
     if [ $? -ne 0 ]; then
         echo "[ERROR]: Impossible to hadd the nTuple for today. Let us exit the main program." >> $outLogFile 
@@ -205,7 +212,7 @@ else
     export scriptsPATH
     export files_to_process
 #    krenew -i -t $scriptsPATH/call_root.sh >> $outLogFile
-    $scriptsPATH/utility/call_root.sh >> $outLogFile
+    $scriptsPATH/utility/generateTree.sh $isNTupleAlreadyThere >> $outLogFile
     if [ $? -ne 0 ]; then
         echo "[ERROR]: Impossible to process the files with the ROOT macro. Let us exit the main program." >> $outLogFile 
         exit 1
